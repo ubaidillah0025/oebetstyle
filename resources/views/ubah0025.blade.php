@@ -46,10 +46,9 @@
     
     @if (isset($data) && $data)
         @php
-            $t = explode('/', $data['tanggal_lahir']);
-            $sekolah_raw = explode(' ', $data['sekolah_asal'], 2);
-            $tipe = $sekolah_raw[0] ?? '';
-            $nama_skolah = $sekolah_raw[1] ?? '';
+            $t = explode(' ', $data['tanggal_lahir'] ?? '');
+            $tipe = $data['tipe_sekolah'] ?? '';
+            $nama_skolah = $data['nama_sekolah'] ?? '';
         @endphp
         <form action="{{ url('/ubah/' . $data['id']) }}" method="POST">
             @csrf
@@ -57,13 +56,13 @@
 
             <div class="form-group">
                 <label>Nama</label>
-                <input type="text" name="nama" value="{{ $data['nama'] }}" required>
+                <input type="text" name="nama" value="{{ $data['nama'] ?? '' }}" required>
             </div>
 
             <div class="form-group-row">
                 <div class="form-group">
                     <label>Tempat Lahir</label>
-                    <input type="text" name="tempat_lahir" value="{{ $data['tempat_lahir'] }}" required>
+                    <input type="text" name="tempat_lahir" value="{{ $data['tempat_lahir'] ?? '' }}" required>
                 </div>
                 <div class="form-group">
                     <label>Tanggal Lahir</label>
@@ -92,14 +91,14 @@
             <div class="form-group">
                 <label>Jenis Kelamin</label>
                 <div class="radio-group">
-                    <label><input type="radio" name="jk" value="Laki-laki" {{ ($data['jenis_kelamin'] == 'Laki-laki') ? 'checked' : '' }}> Laki-laki</label>
-                    <label><input type="radio" name="jk" value="Perempuan" {{ ($data['jenis_kelamin'] == 'Perempuan') ? 'checked' : '' }}> Perempuan</label>
+                    <label><input type="radio" name="jk" value="Laki-laki" {{ (($data['jenis_kelamin'] ?? '') == 'Laki-laki') ? 'checked' : '' }}> Laki-laki</label>
+                    <label><input type="radio" name="jk" value="Perempuan" {{ (($data['jenis_kelamin'] ?? '') == 'Perempuan') ? 'checked' : '' }}> Perempuan</label>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Alamat</label>
-                <input type="text" name="alamat" value="{{ $data['alamat'] }}">
+                <input type="text" name="alamat" value="{{ $data['alamat'] ?? '' }}">
             </div>
 
             <div class="form-group">
@@ -114,9 +113,9 @@
 
             <div class="sub-label">Nilai UAN</div>
             <div class="form-group-row">
-                <div class="form-group"><label>Matematika</label><input type="text" name="n_mat" value="{{ $data['nilai_mat'] }}"></div>
-                <div class="form-group"><label>B. Inggris</label><input type="text" name="n_ing" value="{{ $data['nilai_ing'] }}"></div>
-                <div class="form-group"><label>B. Indonesia</label><input type="text" name="n_ind" value="{{ $data['nilai_ind'] }}"></div>
+                <div class="form-group"><label>Matematika</label><input type="text" name="n_mat" value="{{ $data['n_mat'] ?? '' }}"></div>
+                <div class="form-group"><label>B. Inggris</label><input type="text" name="n_ing" value="{{ $data['n_ing'] ?? '' }}"></div>
+                <div class="form-group"><label>B. Indonesia</label><input type="text" name="n_ind" value="{{ $data['n_ind'] ?? '' }}"></div>
             </div>
 
             <div class="sub-label">Jurusan Yang Dipilih</div>
@@ -124,22 +123,22 @@
                 <div class="form-group">
                     <label>Pilihan 1</label>
                     <select name="pilihan1">
-                        <option value="TEKNIK INFORMATIKA" {{ ($data['pilihan1'] == 'TEKNIK INFORMATIKA') ? 'selected' : '' }}>TEKNIK INFORMATIKA</option>
-                        <option value="TEKNIK INDUSTRI" {{ ($data['pilihan1'] == 'TEKNIK INDUSTRI') ? 'selected' : '' }}>TEKNIK INDUSTRI</option>
+                        <option value="TEKNIK INFORMATIKA" {{ (($data['pilihan1'] ?? '') == 'TEKNIK INFORMATIKA') ? 'selected' : '' }}>TEKNIK INFORMATIKA</option>
+                        <option value="TEKNIK INDUSTRI" {{ (($data['pilihan1'] ?? '') == 'TEKNIK INDUSTRI') ? 'selected' : '' }}>TEKNIK INDUSTRI</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Pilihan 2</label>
                     <select name="pilihan2">
-                        <option value="TEKNIK INFORMATIKA" {{ ($data['pilihan2'] == 'TEKNIK INFORMATIKA') ? 'selected' : '' }}>TEKNIK INFORMATIKA</option>
-                        <option value="TEKNIK INDUSTRI" {{ ($data['pilihan2'] == 'TEKNIK INDUSTRI') ? 'selected' : '' }}>TEKNIK INDUSTRI</option>
+                        <option value="TEKNIK INFORMATIKA" {{ (($data['pilihan2'] ?? '') == 'TEKNIK INFORMATIKA') ? 'selected' : '' }}>TEKNIK INFORMATIKA</option>
+                        <option value="TEKNIK INDUSTRI" {{ (($data['pilihan2'] ?? '') == 'TEKNIK INDUSTRI') ? 'selected' : '' }}>TEKNIK INDUSTRI</option>
                     </select>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Alasan Masuk UNIROW</label>
-                <textarea name="alasan" rows="4">{{ $data['alasan'] }}</textarea>
+                <textarea name="alasan" rows="4">{{ $data['alasan'] ?? '' }}</textarea>
             </div>
 
             <div class="btn-group">

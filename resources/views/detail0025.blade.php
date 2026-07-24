@@ -47,27 +47,27 @@
         <table>
             <tr>
                 <td class="label">ID Pendaftaran</td>
-                <td class="value">: {{ $data['id'] }}</td>
+                <td class="value">: {{ $data['id'] ?? '-' }}</td>
             </tr>
             <tr>
                 <td class="label">Nama Lengkap</td>
-                <td class="value">: <b>{{ $data['nama'] }}</b></td>
+                <td class="value">: <b>{{ $data['nama'] ?? '-' }}</b></td>
             </tr>
             <tr>
                 <td class="label">Tempat, Tgl Lahir</td>
-                <td class="value">: {{ $data['tempat_lahir'] . ", " . $data['tanggal_lahir'] }}</td>
+                <td class="value">: {{ ($data['tempat_lahir'] ?? '-') . ", " . ($data['tanggal_lahir'] ?? '-') }}</td>
             </tr>
             <tr>
                 <td class="label">Jenis Kelamin</td>
-                <td class="value">: {{ $data['jenis_kelamin'] }}</td>
+                <td class="value">: {{ $data['jenis_kelamin'] ?? '-' }}</td>
             </tr>
             <tr>
                 <td class="label">Alamat Rumah</td>
-                <td class="value">: {{ $data['alamat'] }}</td>
+                <td class="value">: {{ $data['alamat'] ?? '-' }}</td>
             </tr>
             <tr>
                 <td class="label">Sekolah Asal</td>
-                <td class="value">: {{ $data['sekolah_asal'] }}</td>
+                <td class="value">: {{ $data['tipe_sekolah'] ?? '-' }} - {{ $data['nama_sekolah'] ?? '-' }}</td>
             </tr>
         </table>
 
@@ -75,19 +75,19 @@
         <table>
             <tr>
                 <td class="label">Nilai Matematika</td>
-                <td class="value">: {{ $data['nilai_mat'] }}</td>
+                <td class="value">: {{ $data['n_mat'] ?? '-' }}</td>
             </tr>
             <tr>
                 <td class="label">Nilai B. Inggris</td>
-                <td class="value">: {{ $data['nilai_ing'] }}</td>
+                <td class="value">: {{ $data['n_ing'] ?? '-' }}</td>
             </tr>
             <tr>
                 <td class="label">Nilai B. Indonesia</td>
-                <td class="value">: {{ $data['nilai_ind'] }}</td>
+                <td class="value">: {{ $data['n_ind'] ?? '-' }}</td>
             </tr>
             <tr>
                 <td class="label">Rata-rata Nilai</td>
-                <td class="value">: <b>{{ number_format(($data['nilai_mat'] + $data['nilai_ing'] + $data['nilai_ind']) / 3, 2) }}</b></td>
+                <td class="value">: <b>{{ number_format((floatval($data['n_mat'] ?? 0) + floatval($data['n_ing'] ?? 0) + floatval($data['n_ind'] ?? 0)) / 3, 2) }}</b></td>
             </tr>
         </table>
 
@@ -95,17 +95,17 @@
         <table>
             <tr>
                 <td class="label">Pilihan 1</td>
-                <td class="value">: <span style="color: #2980b9; font-weight: bold;">{{ $data['pilihan1'] }}</span></td>
+                <td class="value">: <span style="color: #2980b9; font-weight: bold;">{{ $data['pilihan1'] ?? '-' }}</span></td>
             </tr>
             <tr>
                 <td class="label">Pilihan 2</td>
-                <td class="value">: {{ $data['pilihan2'] }}</td>
+                <td class="value">: {{ $data['pilihan2'] ?? '-' }}</td>
             </tr>
         </table>
 
         <div class="section-title">Alasan Pendaftaran</div>
         <div class="alasan-text">
-            "{!! nl2br(e($data['alasan'])) !!}"
+            "{!! nl2br(e($data['alasan'] ?? 'Tidak ada alasan yang diisi.')) !!}"
         </div>
 
         <div style="text-align: center;">
